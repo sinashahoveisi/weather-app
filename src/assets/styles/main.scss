@@ -1,0 +1,11 @@
+@import 'bootstrap/scss/bootstrap.scss';
+@import 'fonts';
+@import 'variables';
+@import 'mixin';
+
+html,
+body {
+  height: 100vh;
+  direction: $direction;
+  font-family: $fontFamily;
+}
