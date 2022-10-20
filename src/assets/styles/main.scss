@@ -11,6 +11,10 @@ body {
   background-color: $primary;
 }
 
+.h-fit {
+  height: fit-content;
+}
+
 .hero {
   background-image: url("../images/sunny.jpg");
   background-position: center;

@@ -1,6 +1,7 @@
 import {NavLink, Outlet} from 'react-router-dom';
 import {FC, useState} from 'react';
 import clsx from 'clsx';
+import SearchCity from '@/containers/header/SearchCity';
 
 const Main: FC = () => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -33,12 +34,7 @@ const Main: FC = () => {
                   </NavLink>
                 </li>
               </ul>
-              <form className="d-flex" role="search">
-                <input className="form-control me-2" type="search" placeholder="Add City" aria-label="add" />
-                <button className="btn btn-outline-success" type="submit">
-                  Search
-                </button>
-              </form>
+              <SearchCity />
             </div>
           </div>
         </nav>

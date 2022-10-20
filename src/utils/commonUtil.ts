@@ -1,13 +1,12 @@
 import replace from 'lodash/replace';
-import toNumber from 'lodash/toNumber';
+import forEach from 'lodash/forEach';
+import entries from 'lodash/entries';
+import toString from 'lodash/toString';
 
-export const toNumberMoney = (money: string): number => toNumber(replace(money, '$', ''));
-
-export const sliceIntoChunks = (arr: any[], chunkSize: number) => {
-  const res = [];
-  for (let i = 0; i < arr.length; i += chunkSize) {
-    const chunk = arr.slice(i, i + chunkSize);
-    res.push(chunk);
-  }
-  return res;
+export const allocateParamToString = (str: string, params?: object): string => {
+  if (!params) return str;
+  forEach(entries(params), ([key, value]: [string, string | number]) => {
+    str = replace(str, `{${key}}`, toString(value));
+  });
+  return str;
 };
