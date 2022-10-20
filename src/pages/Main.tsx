@@ -1,7 +1,7 @@
 import {NavLink, Outlet} from 'react-router-dom';
 import {FC, useState} from 'react';
 import clsx from 'clsx';
-import SearchCity from '@/containers/header/SearchCity';
+import AddCity from '@/containers/header/AddCity';
 
 const Main: FC = () => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -34,7 +34,7 @@ const Main: FC = () => {
                   </NavLink>
                 </li>
               </ul>
-              <SearchCity />
+              <AddCity />
             </div>
           </div>
         </nav>

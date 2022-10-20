@@ -11,8 +11,16 @@ body {
   background-color: $primary;
 }
 
+#root {
+  padding-bottom: 10rem;
+}
+
 .h-fit {
   height: fit-content;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.62);
 }
 
 .hero {
@@ -25,6 +33,9 @@ body {
 }
 
 .weather-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-image: url("../images/mountain.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -35,4 +46,32 @@ body {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 0 10px 15px -3pxrgba(0, 0, 0, 0.1),0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.img-weather {
+  width: 80px;
+  filter: drop-shadow(0 0 4px white);
+}
+
+.country-badge {
+  font-size: .75rem;
+  font-weight: bold;
+  color:  #DFA94A;
+  top: -1em;
+  padding-inline-start: 0.5rem;
+  padding-inline-end: 0.5rem;
+  border-radius: 10px;
+}
+
+.flex-basis-50 {
+  flex-basis: 50%;
+}
+
+.card-glassmorphism {
+  background: rgba( 255, 255, 255, 0.2 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 7px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
 }

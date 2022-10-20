@@ -1,15 +1,15 @@
-export interface ResortProps {
-  id: number;
-  title: string;
-  description: string;
-  price: string;
-  imageUrl: string;
+export interface CityProps {
+  country: string;
+  name: string;
+  lat: number;
+  lon: number;
+  localNames: Object;
 }
 
-export type FilterResortsProps = {
-  title?: string;
-  minPrice?: number;
-  maxPrice?: number;
-};
+export type CityActionType = 'ADD_CITY' | 'DELETE_CITY';
 
-export type SortTypeResortsType = 'title' | 'price';
+export interface CityActionProps {
+  type: CityActionType;
+  city?: CityProps;
+  index?: number;
+}

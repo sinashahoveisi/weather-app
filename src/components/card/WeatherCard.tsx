@@ -4,7 +4,7 @@ import WeatherStatisticsCard from '@/components/card/WeatherStatisticsCard';
 
 interface Props {
   timeSecond: number;
-  isToday: boolean;
+  isToday?: boolean;
   iconCode: string;
   city: string;
   countryCode: string;
@@ -26,25 +26,23 @@ const WeatherCard: FC<Props> = ({
   humidity
 }) => {
   return (
-    <article className="card text-bg-dark weather-card d-flex flex-column justify-content-center p-4">
-      <div className="card-img-overlay">
-        <h4 className="card-title">{formatDateTimeFromSecond(timeSecond, 'dddd')}</h4>
-        <h5 className="card-text">{formatDateTimeFromSecond(timeSecond, 'dd')}</h5>
-        <img
-          className="img-fluid img-thumbnail"
-          src={`http://openweathermap.org/img/wn/${iconCode}@2x.png`}
-          alt={iconCode}
-        />
-        <h2>
-          {city}
-          <sup>{countryCode}</sup>
-        </h2>
-        <p className="card-text">{description}</p>
-        <div className="w-full d-flex flex-row justify-content-center align-items-center">
-          <WeatherStatisticsCard title="Temperature" value={temperature} unit="ºC" />
-          <WeatherStatisticsCard title="Feels Like" value={feelsLikeTemperature} unit="ºC" />
-          <WeatherStatisticsCard title="Humidity" value={humidity} unit="%" />
-        </div>
+    <article className="card text-bg-dark weather-card p-4">
+      <h4 className="card-title fs-6 fw-semibold">{formatDateTimeFromSecond(timeSecond, 'dddd')}</h4>
+      <h5 className="card-text fs-5 fw-lighter">{formatDateTimeFromSecond(timeSecond, 'D')}</h5>
+      <img
+        className="img-fluid img-weather"
+        src={`http://openweathermap.org/img/wn/${iconCode}@2x.png`}
+        alt={iconCode}
+      />
+      <h2 className="fs-5 fw-bold">
+        {city}
+        <sup className="country-badge">{countryCode}</sup>
+      </h2>
+      <p className="card-text fw-light fw-4 text-white-50">{description}</p>
+      <div className="w-100 d-flex flex-row flex-wrap justify-content-center align-items-center card-glassmorphism">
+        <WeatherStatisticsCard title="Temperature" value={temperature} unit="ºC" />
+        <WeatherStatisticsCard title="Feels Like" value={feelsLikeTemperature} unit="ºC" />
+        <WeatherStatisticsCard title="Humidity" value={humidity} unit="%" />
       </div>
     </article>
   );

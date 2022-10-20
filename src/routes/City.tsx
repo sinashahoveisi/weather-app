@@ -5,7 +5,7 @@ import ShowCityPage from '@/pages/city/ShowCity';
 const CityRoute: FC = () => {
   return (
     <Routes>
-      <Route path=":id/:title" element={<ShowCityPage />} />
+      <Route path="show" element={<ShowCityPage />} />
     </Routes>
   );
 };
