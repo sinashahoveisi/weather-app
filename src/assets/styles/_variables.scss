@@ -1,4 +1,11 @@
+
 $fontFamily: Vazirmatn, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
   'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
 $direction: ltr;
+
+$primary: #171923;
+$secondary: #f8f9fa;
+
+$body-bg: $primary !default;
+$body-color: $secondary !default;

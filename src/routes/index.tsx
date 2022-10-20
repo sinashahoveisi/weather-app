@@ -7,8 +7,8 @@ const MyRoutes = () => {
   return (
     <Routes>
       <Route element={<Main />}>
-        <Route path="/dashboard/*" element={<City />} />
-        <Route path="/city/*" element={<Dashboard />} />
+        <Route path="/dashboard/*" element={<Dashboard />} />
+        <Route path="/city/*" element={<City />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Route>
     </Routes>

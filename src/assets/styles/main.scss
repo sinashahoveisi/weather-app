@@ -1,11 +1,21 @@
-@import 'bootstrap/scss/bootstrap.scss';
 @import 'fonts';
 @import 'variables';
 @import 'mixin';
+@import 'bootstrap/scss/bootstrap.scss';
 
 html,
 body {
   height: 100vh;
   direction: $direction;
   font-family: $fontFamily;
+  background-color: $primary;
+}
+
+.hero {
+  background-image: url("../images/sunny.jpg");
+  background-position: center;
+  background-size: cover;
+  background-color: #000000a3;
+  background-blend-mode: overlay;
+  height: 400px;
 }

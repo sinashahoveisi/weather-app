@@ -1,13 +1,8 @@
 import type {FC} from 'react';
 import MyRoutes from './routes';
 
-const App : FC = () => {
+const App: FC = () => {
+  return <MyRoutes />;
+};
 
-  return (
-      <div className="container">
-          <MyRoutes />
-      </div>
-  )
-}
-
-export default App
+export default App;

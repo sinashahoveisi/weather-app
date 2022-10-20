@@ -19,8 +19,8 @@ export default defineConfig({
         scope: '.',
         display: 'standalone',
         orientation: 'portrait',
-        theme_color: '#001529',
-        background_color: '#ffffff',
+        theme_color: '#ffffff',
+        background_color: '#171923',
         icons: [
           {
             src: './images/android/48.png',
