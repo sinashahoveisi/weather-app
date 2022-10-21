@@ -42,7 +42,7 @@ const useFetch = ({
 
   const requestConfig: AxiosRequestConfig = {
     baseURL: import.meta.env.VITE_BASE_URL,
-    timeout: 30000,
+    timeout: 10000,
     url: allocateParamToString(url, merge(params, dynamicParams?.params)),
     method: 'GET',
     params: merge(query, dynamicParams?.query, {appid: import.meta.env.VITE_OPEN_WEATHER_APP_ID})
@@ -50,7 +50,7 @@ const useFetch = ({
 
   const fetchData = useQuery(prettyName, () => axios(requestConfig), {
     refetchOnWindowFocus: false,
-    refetchInterval: false,
+    refetchInterval: 30000,
     refetchOnReconnect: true,
     refetchIntervalInBackground: true,
     keepPreviousData: false,

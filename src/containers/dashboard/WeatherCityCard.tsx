@@ -14,7 +14,12 @@ const WeatherCityCard: FC<Props> = ({city}) => {
   const fetchWeatherCity = useFetch({
     name: ['weather', city?.lat, city?.lon],
     url: 'data/2.5/onecall',
-    query: {lat: city?.lat, lon: city?.lon},
+    query: {
+      lat: city?.lat,
+      lon: city?.lon,
+      units: 'metric',
+      exclude: 'minutely'
+    },
     enabled: true
   });
 
