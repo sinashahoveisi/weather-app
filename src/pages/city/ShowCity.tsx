@@ -1,14 +1,17 @@
-import type {FC} from 'react';
+import {ElementRef, FC, useCallback, useRef} from 'react';
 import {useLocation} from 'react-router-dom';
 import get from 'lodash/get';
 import map from 'lodash/map';
 import HeroView from '@/components/view/HeroView';
 import useFetch from '@/hooks/request/useFetch';
 import WeatherCard from '@/components/card/WeatherCard';
-import {WeekdayWeatherDetailProps} from '@/types/weather';
+import type {WeekdayWeatherDetailProps} from '@/types/weather';
+import WeatherCityDetail from '@/containers/city/WeatherCityDetail';
+import {TodayWeatherDetailProps} from '@/types/weather';
 
 const ShowCity: FC = () => {
   const location = useLocation();
+  const weatherCityDetailRef = useRef<ElementRef<typeof WeatherCityDetail>>(null);
 
   const fetchWeatherCity = useFetch({
     name: ['weather', location?.state?.city?.lat, location?.state?.city?.lon],
@@ -21,6 +24,10 @@ const ShowCity: FC = () => {
     },
     enabled: true
   });
+
+  const openWeatherDetailModal = useCallback((detail: TodayWeatherDetailProps | WeekdayWeatherDetailProps) => {
+    if (weatherCityDetailRef?.current?.open) weatherCityDetailRef.current.open(detail);
+  }, []);
 
   return (
     <main>
@@ -38,6 +45,7 @@ const ShowCity: FC = () => {
               temperature={fetchWeatherCity?.data?.data?.current?.temp}
               feelsLikeTemperature={fetchWeatherCity?.data?.data?.current?.feels_like}
               humidity={fetchWeatherCity?.data?.data?.current?.humidity}
+              onClick={() => openWeatherDetailModal(fetchWeatherCity?.data?.data?.current)}
             />
           </aside>
           <div className="col-12 col-md-6 col-lg-8 col-xl-9 mt-4 mt-md-0 d-flex flex-column justify-content-between">
@@ -51,6 +59,7 @@ const ShowCity: FC = () => {
                     description={get(weekdayWeather, ['weather', 0, 'description'])}
                     temperature={weekdayWeather?.temp?.day}
                     feelsLikeTemperature={weekdayWeather?.feels_like?.day}
+                    onClick={() => openWeatherDetailModal(weekdayWeather)}
                   />
                 </div>
               ))}
@@ -61,6 +70,7 @@ const ShowCity: FC = () => {
           </div>
         </div>
       </section>
+      <WeatherCityDetail ref={weatherCityDetailRef} />
     </main>
   );
 };

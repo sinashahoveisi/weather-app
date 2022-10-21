@@ -12,6 +12,7 @@ interface Props {
   temperature: number;
   feelsLikeTemperature: number;
   humidity?: number;
+  onClick?(): void;
 }
 
 const WeatherCard: FC<Props> = ({
@@ -22,10 +23,11 @@ const WeatherCard: FC<Props> = ({
   description,
   temperature,
   feelsLikeTemperature,
-  humidity
+  humidity,
+  onClick
 }) => {
   return (
-    <article className="card text-bg-dark weather-card p-4">
+    <article className="card text-bg-dark weather-card p-4" onClick={onClick}>
       <h4 className="card-title fs-6 fw-semibold">{formatDateTimeFromSecond(timeSecond, 'dddd')}</h4>
       <h5 className="card-text fs-5 fw-lighter">{formatDateTimeFromSecond(timeSecond, 'D')}</h5>
       <img

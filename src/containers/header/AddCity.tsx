@@ -2,7 +2,7 @@ import type {ChangeEvent, FC} from 'react';
 import {useUpdateAtom} from 'jotai/utils';
 import debounce from 'lodash/debounce';
 import clsx from 'clsx';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import map from 'lodash/map';
 import useFetch from '@/hooks/request/useFetch';
 import cityAtom from '@/atoms/cityAtom';
@@ -16,6 +16,11 @@ const AddCity: FC = () => {
     name: ['direct', 'new'],
     url: 'geo/1.0/direct'
   });
+
+  useEffect(() => {
+    if (openModal) document.querySelector('body')?.classList.add('modal-open');
+    else document.querySelector('body')?.classList.remove('modal-open');
+  }, [openModal]);
 
   const toogleModal = () => setOpenModal((prevState: boolean) => !prevState);
 
@@ -33,8 +38,8 @@ const AddCity: FC = () => {
       <button className="btn btn-sm btn-outline-success h-fit" type="button" onClick={toogleModal}>
         Add City
       </button>
-      <div className={clsx('modal fade', {'show d-block': openModal})} id="exampleModal">
-        <div className="modal-dialog">
+      <div className={clsx('modal fade', {'show d-block': openModal})}>
+        <div className="modal-dialog modal-md modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5">Add City</h1>

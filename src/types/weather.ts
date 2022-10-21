@@ -48,7 +48,6 @@ export interface WeekdayWeatherDetailProps extends WeatherBaseDetailProps {
   temp: TemperatureProps;
   feels_like: FeelsLikeProps;
   wind_gust: number;
-  weather: WeatherProps[];
   pop: number;
   rain: number;
 }

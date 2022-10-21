@@ -67,6 +67,13 @@ body {
   flex-basis: 50%;
 }
 
+.modal-open {
+  position: fixed;
+  overflow-y: scroll;
+  inset: 0;
+  padding-right: 0px;
+}
+
 .overflow-x-auto {
   overflow-x: auto;
 }
