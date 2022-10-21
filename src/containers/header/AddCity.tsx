@@ -14,6 +14,7 @@ const AddCity: FC = () => {
 
   const fetchCity = useFetch({
     name: ['direct', 'new'],
+    query: {limit: 5},
     url: 'geo/1.0/direct'
   });
 
@@ -51,7 +52,7 @@ const AddCity: FC = () => {
                 onClick={toogleModal}
               />
             </div>
-            <div className="modal-body">
+            <div className="modal-body overflow-x-hidden">
               <input
                 className="form-control me-2 w-100"
                 type="search"
