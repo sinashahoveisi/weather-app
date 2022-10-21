@@ -5,7 +5,7 @@ import {useCallback} from 'react';
 import HeroView from '@/components/view/HeroView';
 import cityAtom from '@/atoms/cityAtom';
 import WeatherCityCard from '@/containers/dashboard/WeatherCityCard';
-import {CityProps} from '@/types/city';
+import type {CityProps} from '@/types/city';
 
 const Dashboard: FC = () => {
   const [cities, setCities] = useAtom(cityAtom);
