@@ -54,7 +54,7 @@ const WeatherCityCard: ForwardRefRenderFunction<refProps, Props> = ({ref}, forwa
           <div className="modal-header">
             <h1 className="modal-title fs-5">{`Weather Info from ${formatDateTimeFromSecond(
               weatherDetail?.dt,
-              'dddd'
+              'LL'
             )}`}</h1>
             <button
               type="button"

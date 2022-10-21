@@ -1,5 +1,5 @@
 import {atomWithReducer} from 'jotai/utils';
-import pullAt from 'lodash/pullAt';
+import remove from 'lodash/remove';
 import {getFromStorage, saveToStorage} from '@/utils/storageUtil';
 import type {CityProps, CityActionProps} from '@/types/city';
 
@@ -13,18 +13,25 @@ function callReducer(state: CityProps[], action: CityActionProps) {
       }
       return state;
     case 'DELETE_CITY':
-      if (action?.index) {
-        const newRemoveState = [...state];
-        pullAt(newRemoveState, action?.index);
-        saveToStorage('cities', newRemoveState);
-        return newRemoveState;
-      }
-      return state;
+      const newRemoveState = [...state];
+      remove(newRemoveState, ['name', action?.name]);
+      saveToStorage('cities', newRemoveState);
+      return newRemoveState;
     default:
       return {...state};
   }
 }
 
-const cityAtom = atomWithReducer(getFromStorage('cities') || [], callReducer);
+const cityAtom = atomWithReducer(
+  getFromStorage('cities') || [
+    {
+      name: 'Tehran',
+      lat: 35.6892523,
+      lon: 51.3896004,
+      country: 'IR'
+    }
+  ],
+  callReducer
+);
 
 export default cityAtom;

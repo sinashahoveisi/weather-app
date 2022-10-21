@@ -11,5 +11,5 @@ export type CityActionType = 'ADD_CITY' | 'DELETE_CITY';
 export interface CityActionProps {
   type: CityActionType;
   city?: CityProps;
-  index?: number;
+  name?: string;
 }

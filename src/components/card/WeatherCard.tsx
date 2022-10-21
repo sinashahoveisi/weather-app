@@ -1,9 +1,12 @@
-import type {FC} from 'react';
+import type {FC, MouseEvent} from 'react';
+import {useUpdateAtom} from 'jotai/utils';
 import {formatDateTimeFromSecond} from '@/utils/dateTimeUtil';
 import WeatherStatisticsCard from '@/components/card/WeatherStatisticsCard';
+import cityAtom from '@/atoms/cityAtom';
 
 interface Props {
   timeSecond: number;
+  hasDelete?: boolean;
   isSummary?: boolean;
   iconCode: string;
   city?: string;
@@ -17,6 +20,7 @@ interface Props {
 
 const WeatherCard: FC<Props> = ({
   city,
+  hasDelete,
   countryCode,
   isSummary,
   timeSecond,
@@ -27,8 +31,16 @@ const WeatherCard: FC<Props> = ({
   humidity,
   onClick
 }) => {
+  const setCities = useUpdateAtom(cityAtom);
+
+  const onDelete = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
+    setCities({type: 'DELETE_CITY', name: city});
+  };
+
   return (
-    <article className="card text-bg-dark weather-card p-4" onClick={onClick}>
+    <article className="card text-bg-dark weather-card p-4 position-relative" onClick={onClick}>
       <h4 className="card-title fs-6 fw-semibold">{formatDateTimeFromSecond(timeSecond, 'dddd')}</h4>
       <h5 className="card-text fs-5 fw-lighter">{formatDateTimeFromSecond(timeSecond, 'D')}</h5>
       <img
@@ -56,6 +68,11 @@ const WeatherCard: FC<Props> = ({
         />
         {!!humidity && <WeatherStatisticsCard title="Humidity" value={humidity?.toFixed(isSummary ? 0 : 2)} unit="%" />}
       </div>
+      {hasDelete && (
+        <button type="button" className="btn btn-danger btn-sm position-absolute top-2 right-2" onClick={onDelete}>
+          Delete
+        </button>
+      )}
     </article>
   );
 };
