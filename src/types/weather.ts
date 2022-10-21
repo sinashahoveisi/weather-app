@@ -1,3 +1,5 @@
+import {extend} from 'lodash';
+
 export interface WeatherProps {
   id: number;
   main: string;
@@ -33,6 +35,8 @@ export interface WeatherBaseDetailProps {
   wind_speed: number;
   wind_deg: number;
   weather: WeatherProps[];
+  minTemp: number;
+  maxTemp: number;
 }
 
 export interface TodayWeatherDetailProps extends WeatherBaseDetailProps {
@@ -52,11 +56,12 @@ export interface WeekdayWeatherDetailProps extends WeatherBaseDetailProps {
   rain: number;
 }
 
-export interface RootObject {
+export interface CityWeatherProps {
   lat: number;
   lon: number;
   timezone: string;
   timezone_offset: number;
   current: TodayWeatherDetailProps;
+  hourly: TodayWeatherDetailProps[];
   daily: WeekdayWeatherDetailProps[];
 }

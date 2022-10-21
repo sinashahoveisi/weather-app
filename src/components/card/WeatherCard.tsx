@@ -4,7 +4,7 @@ import WeatherStatisticsCard from '@/components/card/WeatherStatisticsCard';
 
 interface Props {
   timeSecond: number;
-  isToday?: boolean;
+  isSummary?: boolean;
   iconCode: string;
   city?: string;
   countryCode?: string;
@@ -18,6 +18,7 @@ interface Props {
 const WeatherCard: FC<Props> = ({
   city,
   countryCode,
+  isSummary,
   timeSecond,
   iconCode,
   description,
@@ -43,13 +44,17 @@ const WeatherCard: FC<Props> = ({
       )}
       <p className="card-text fw-light fw-4 text-white-50">{description}</p>
       <div className="w-100 d-flex flex-row flex-wrap justify-content-center align-items-center card-glassmorphism">
-        <WeatherStatisticsCard title={city && countryCode ? 'Temperature' : undefined} value={temperature} unit="ºC" />
         <WeatherStatisticsCard
-          title={city && countryCode ? 'Feels Like' : undefined}
-          value={feelsLikeTemperature}
+          title={!isSummary ? 'Temperature' : undefined}
+          value={temperature?.toFixed(isSummary ? 0 : 2)}
           unit="ºC"
         />
-        {!!humidity && <WeatherStatisticsCard title="Humidity" value={humidity} unit="%" />}
+        <WeatherStatisticsCard
+          title={!isSummary ? 'Feels Like' : undefined}
+          value={feelsLikeTemperature?.toFixed(isSummary ? 0 : 2)}
+          unit="ºC"
+        />
+        {!!humidity && <WeatherStatisticsCard title="Humidity" value={humidity?.toFixed(isSummary ? 0 : 2)} unit="%" />}
       </div>
     </article>
   );

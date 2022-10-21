@@ -2,7 +2,7 @@ import type {FC} from 'react';
 
 interface Props {
   title?: string;
-  value: number;
+  value: number | string;
   unit: string;
 }
 
