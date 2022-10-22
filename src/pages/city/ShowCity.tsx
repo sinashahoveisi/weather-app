@@ -9,13 +9,13 @@ import useFetch from '@/hooks/request/useFetch';
 import WeatherCard from '@/components/card/WeatherCard';
 import type {WeekdayWeatherDetailProps} from '@/types/weather';
 import WeatherCityDetail from '@/containers/city/WeatherCityDetail';
-import {TodayWeatherDetailProps} from '@/types/weather';
+import {CityWeatherProps, TodayWeatherDetailProps} from '@/types/weather';
 
 const ShowCity: FC = () => {
   const location = useLocation();
   const weatherCityDetailRef = useRef<ElementRef<typeof WeatherCityDetail>>(null);
 
-  const fetchWeatherCity = useFetch({
+  const fetchWeatherCity = useFetch<CityWeatherProps>({
     name: ['weather', location?.state?.city?.lat, location?.state?.city?.lon],
     url: 'data/2.5/onecall',
     query: {
@@ -28,7 +28,7 @@ const ShowCity: FC = () => {
   });
 
   const openWeatherDetailModal = useCallback(
-    (detail: TodayWeatherDetailProps | WeekdayWeatherDetailProps, minTemp: number, maxTemp: number) => {
+    (detail: TodayWeatherDetailProps | WeekdayWeatherDetailProps, minTemp?: number, maxTemp?: number) => {
       if (weatherCityDetailRef?.current?.open)
         weatherCityDetailRef.current.open({
           ...detail,
@@ -45,7 +45,7 @@ const ShowCity: FC = () => {
     <main>
       <HeroView headerText={location?.state?.city?.name} subHeaderText="Weather for the next 7 days" />
       <section className="my-4 container">
-        {fetchWeatherCity?.isFetching ? (
+        {fetchWeatherCity?.isFetching || !fetchWeatherCity?.data ? (
           <div className="d-flex flex-column justify-content-center align-items-center">
             <div className="spinner-border spinner-border text-info" role="status">
               <span className="visually-hidden">Loading...</span>

@@ -1,6 +1,4 @@
 import type {FC} from 'react';
-import {formatDateTimeFromSecond} from '@/utils/dateTimeUtil';
-import WeatherStatisticsCard from '@/components/card/WeatherStatisticsCard';
 
 interface Props {
   city: string;

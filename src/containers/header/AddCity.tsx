@@ -1,18 +1,18 @@
-import type {ChangeEvent, FC} from 'react';
-import {useUpdateAtom} from 'jotai/utils';
-import debounce from 'lodash/debounce';
+import {ChangeEvent, FC, useEffect, useState} from 'react';
+import {useAtom} from 'jotai';
 import clsx from 'clsx';
-import {useEffect, useState} from 'react';
+import debounce from 'lodash/debounce';
 import map from 'lodash/map';
-import useFetch from '@/hooks/request/useFetch';
+import some from 'lodash/some';
 import cityAtom from '@/atoms/cityAtom';
-import {CityProps} from '@/types/city';
+import useFetch from '@/hooks/request/useFetch';
+import type {CityProps} from '@/types/city';
 
 const AddCity: FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const setCities = useUpdateAtom(cityAtom);
+  const [cities, setCities] = useAtom(cityAtom);
 
-  const fetchCity = useFetch({
+  const fetchCity = useFetch<CityProps[]>({
     name: ['direct', 'new'],
     query: {limit: 5},
     url: 'geo/1.0/direct'
@@ -53,25 +53,37 @@ const AddCity: FC = () => {
               />
             </div>
             <div className="modal-body overflow-x-hidden">
-              <input
-                className="form-control me-2 w-100"
-                type="search"
-                onChange={onSearch}
-                placeholder="Search City ..."
-                aria-label="Search"
-              />
-              <ul className="list-group mt-4">
-                {map(fetchCity?.data?.data, (city: CityProps) => (
-                  <li key={city?.name} className="list-group-item">
-                    <button
-                      type="button"
-                      className="btn btn-outline-light border-0 w-100"
-                      onClick={() => addCity(city)}>
-                      {city?.name} - {city?.country}
-                    </button>
-                  </li>
-                ))}
-              </ul>
+              <div className="d-flex flex-column justify-content-center align-items-center gap-2 h-100">
+                <input
+                  className="form-control me-2 w-100"
+                  type="search"
+                  onChange={onSearch}
+                  placeholder="Search City ..."
+                  aria-label="Search"
+                />
+                {fetchCity?.isFetching ? (
+                  <div className="spinner-border spinner-border text-info" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                ) : (
+                  <ul className="list-group mt-4 w-100">
+                    {map(fetchCity?.data?.data, (city: CityProps) => (
+                      <li key={city?.name} className="list-group-item">
+                        <button
+                          type="button"
+                          className="btn btn-outline-light border-0 w-100"
+                          disabled={some(cities, ['name', city?.name])}
+                          onClick={() => addCity(city)}>
+                          <span className="fs-5 fw-bold">
+                            {city?.name}
+                            <sup className="country-badge">{city?.country}</sup>
+                          </span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           </div>
         </div>

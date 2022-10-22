@@ -35,8 +35,8 @@ export interface WeatherBaseDetailProps {
   wind_speed: number;
   wind_deg: number;
   weather: WeatherProps[];
-  minTemp: number;
-  maxTemp: number;
+  minTemp?: number;
+  maxTemp?: number;
 }
 
 export interface TodayWeatherDetailProps extends WeatherBaseDetailProps {

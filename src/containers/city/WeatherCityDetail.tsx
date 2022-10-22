@@ -84,8 +84,12 @@ const WeatherCityCard: ForwardRefRenderFunction<refProps, Props> = ({ref}, forwa
                   <WeatherStatisticsCard title="Wind Direction" value={weatherDetail?.wind_deg} unit="º" />
                   <WeatherStatisticsCard title="Clouds" value={weatherDetail?.clouds} unit="%" />
                   <WeatherStatisticsCard title="Rain" value={weatherDetail?.uvi} unit="%" />
-                  <WeatherStatisticsCard title="Temperature Max" value={weatherDetail?.minTemp} unit="ºC" />
-                  <WeatherStatisticsCard title="Temperature Min" value={weatherDetail?.maxTemp} unit="ºC" />
+                  {weatherDetail?.minTemp && (
+                    <WeatherStatisticsCard title="Temperature Max" value={weatherDetail?.minTemp} unit="ºC" />
+                  )}
+                  {weatherDetail?.maxTemp && (
+                    <WeatherStatisticsCard title="Temperature Min" value={weatherDetail?.maxTemp} unit="ºC" />
+                  )}
                 </div>
               </div>
             </div>

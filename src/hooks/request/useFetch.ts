@@ -1,5 +1,5 @@
 import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
-import {useQuery} from 'react-query';
+import {useQuery, UseQueryResult} from 'react-query';
 import {useEffect, useState} from 'react';
 import compact from 'lodash/compact';
 import isString from 'lodash/isString';
@@ -21,7 +21,7 @@ interface IGetConfig {
   onError?(error: AxiosError): void;
 }
 
-const useFetch = ({
+const useFetch = <Response>({
   url,
   name = 'notLongTimeAvailable',
   query,
@@ -48,7 +48,10 @@ const useFetch = ({
     params: merge(query, dynamicParams?.query, {appid: import.meta.env.VITE_OPEN_WEATHER_APP_ID})
   };
 
-  const fetchData = useQuery(prettyName, () => axios(requestConfig), {
+  const fetchData: UseQueryResult<AxiosResponse<Response, Response>, AxiosError> = useQuery<
+    AxiosResponse<Response>,
+    AxiosError
+  >(prettyName, () => axios(requestConfig), {
     refetchOnWindowFocus: false,
     refetchInterval: 30000,
     refetchOnReconnect: true,
