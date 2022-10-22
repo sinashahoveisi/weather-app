@@ -5,13 +5,14 @@ import type {CityProps} from '@/types/city';
 import useFetch from '@/hooks/request/useFetch';
 import WeatherCard from '@/components/card/WeatherCard';
 import WeatherCardLoading from '@/components/card/WeatherCardLoading';
+import {CityWeatherProps} from '@/types/weather';
 
 interface Props {
   city: CityProps;
 }
 
 const WeatherCityCard: FC<Props> = ({city}) => {
-  const fetchWeatherCity = useFetch({
+  const fetchWeatherCity = useFetch<CityWeatherProps>({
     name: ['weather', city?.lat, city?.lon],
     url: 'data/2.5/onecall',
     query: {
@@ -23,7 +24,8 @@ const WeatherCityCard: FC<Props> = ({city}) => {
     enabled: true
   });
 
-  if (fetchWeatherCity?.isFetching) return <WeatherCardLoading city={city?.name} countryCode={city?.country} />;
+  if (fetchWeatherCity?.isFetching || !fetchWeatherCity?.data)
+    return <WeatherCardLoading city={city?.name} countryCode={city?.country} />;
 
   return (
     <Link className="text-decoration-none" to="/city/show" state={{city}}>
