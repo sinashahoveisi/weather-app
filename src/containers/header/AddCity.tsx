@@ -53,9 +53,9 @@ const AddCity: FC = () => {
               />
             </div>
             <div className="modal-body overflow-x-hidden">
-              <div className="d-flex flex-column justify-content-center align-items-center gap-2 h-100">
+              <div className="d-flex flex-column justify-content-center align-items-center h-100">
                 <input
-                  className="form-control me-2 w-100"
+                  className="form-control w-100 mb-2"
                   type="search"
                   onChange={onSearch}
                   placeholder="Search City ..."

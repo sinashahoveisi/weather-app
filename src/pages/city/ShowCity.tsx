@@ -77,9 +77,9 @@ const ShowCity: FC = () => {
               </aside>
               <div className="col-12 col-md-6 col-lg-8 col-xl-9 mt-4 mt-md-0 d-flex flex-column justify-content-between">
                 <h3 className="fs-5">other days of week</h3>
-                <div className="d-flex flex-row flex-nowrap overflow-x-auto align-items-center gap-2">
+                <div className="row d-flex flex-row flex-nowrap overflow-x-auto align-items-center">
                   {map(fetchWeatherCity?.data?.data?.daily, (weekdayWeather: WeekdayWeatherDetailProps) => (
-                    <div key={weekdayWeather?.dt} className="col-11 col-md-8 col-lg-4 col-xl-3">
+                    <div key={weekdayWeather?.dt} className="col-11 col-md-8 col-lg-4 col-xl-3 p-2">
                       <WeatherCard
                         isSummary
                         timeSecond={weekdayWeather?.dt}

@@ -20,7 +20,7 @@ const Dashboard: FC = () => {
         ) : (
           <div className="row">
             {map(cities, (city: CityProps) => (
-              <div key={city?.name} className="col-12 col-md-6 col-lg-4 col-xl-3">
+              <div key={city?.name} className="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
                 <WeatherCityCard city={city} />
               </div>
             ))}
